@@ -1,8 +1,11 @@
 <?php
 namespace QuarkPHP;
+//版本号
+//public static $Version = '1.0.0';
 
 //可被控制器继承的基类，实现 获取路由参数值、执行视图、载入模型、载入插件等功能
 class Base {
+
     //接收路由参数的变量
     public static $RouteParams = array();
     public static $ModelPath = '/model';
