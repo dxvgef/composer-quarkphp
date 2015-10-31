@@ -4,6 +4,7 @@
 	"keywords": ["framework"],
 	"license": "BSD-3-Clause",
 	"version": "1.0.0",
+	"minimum-stability": "stable",
 	"authors": [
 		{
 			"name": "dxvgef",
