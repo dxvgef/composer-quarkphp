@@ -16,12 +16,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-            "QuarkPHP\\Dispatcher": "src/Dispatcher",
-			"QuarkPHP\\Base": "src/Base",
-            "QuarkPHP\\Logger": "src/Logger",
-            "QuarkPHP\\Connect": "src/Connect",
-            "QuarkPHP\\Upload": "src/Upload",
-            "QuarkPHP\\VerifyCode": "src/VerifyCode"
+            "QuarkPHP\\Dispatcher\\": "src/Dispatcher",
+			"QuarkPHP\\Base\\": "src/Base",
+            "QuarkPHP\\Logger\\": "src/Logger",
+            "QuarkPHP\\Connect\\": "src/Connect",
+            "QuarkPHP\\Upload\\": "src/Upload",
+            "QuarkPHP\\VerifyCode\\": "src/VerifyCode"
 		}
 	}
 }
