@@ -1,10 +1,10 @@
 <?php
 namespace QuarkPHP;
 
-//ÈÕÖ¾¼ÇÂ¼Àà
+//æ—¥å¿—è®°å½•ç±»
 class Logger {
 
-    //ÈÕÖ¾¼ÇÂ¼¼¶±ð£¨Áô¿ÕÔò²»¼ÇÂ¼£©
+    //æ—¥å¿—è®°å½•çº§åˆ«ï¼ˆç•™ç©ºåˆ™ä¸è®°å½•ï¼‰
     public static $Level = '';
     public static $Path = '';
 
@@ -91,7 +91,7 @@ class Logger {
         }
     }
 
-    //Ð´ÈÕÖ¾ÎÄ¼þ
+    //å†™æ—¥å¿—æ–‡ä»¶
     private static function output($info = array()) {
         $fp = fopen(ROOT_PATH . '/' . self::$Path . '/' . date('Y-m-d') . '.txt', 'a');
         flock($fp, LOCK_EX | LOCK_NB);

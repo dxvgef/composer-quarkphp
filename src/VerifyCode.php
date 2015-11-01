@@ -2,75 +2,75 @@
 namespace QuarkPHP;
 
 class VerifyCode {
-    //-------------- ÑéÖ¤Âë»æÖÆ²ÎÊı -------------------
-    public static $ImageWidth = 85; //Í¼Æ¬¿í¶È
-    public static $ImageHeight = 25; //Í¼Æ¬¸ß¶È
-    public static $ImageBgcolor = array(255, 255, 255); //Í¼Æ¬µÄ±³¾°ÑÕÉ«
-    public static $StrCount = 4; //ÏÔÊ¾×Ö·ûÊıÁ¿
-    public static $FontFace = '/data/www/simhei.ttf'; //×ÖÌåÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-    public static $FontSize = 18; //ÎÄ×Ö´óĞ¡(ÏñËØ)
-    public static $FontRotate = 30; //ÎÄ×ÖĞı×ª½Ç¶È(0-180)
-    public static $FontSpace = 3; //ÎÄ×Ö¼ä¾à
-    public static $DisturbLine = 15; //¸ÉÈÅÇúÏßÊıÁ¿
-    public static $DisturbPixel = 100; //¸ÉÈÅÔëµãÊıÁ¿
-    public static $VarName = 'vcode';   //ÑéÖ¤Âësession±äÁ¿µÄÃû³Æ
-    //ÔÊĞí³öÏÖµÄ×Ö·û£¬¿ÉÒÔÊÇºº×Ö
+    //-------------- éªŒè¯ç ç»˜åˆ¶å‚æ•° -------------------
+    public static $ImageWidth = 85; //å›¾ç‰‡å®½åº¦
+    public static $ImageHeight = 25; //å›¾ç‰‡é«˜åº¦
+    public static $ImageBgcolor = array(255, 255, 255); //å›¾ç‰‡çš„èƒŒæ™¯é¢œè‰²
+    public static $StrCount = 4; //æ˜¾ç¤ºå­—ç¬¦æ•°é‡
+    public static $FontFace = '/data/www/simhei.ttf'; //å­—ä½“æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+    public static $FontSize = 18; //æ–‡å­—å¤§å°(åƒç´ )
+    public static $FontRotate = 30; //æ–‡å­—æ—‹è½¬è§’åº¦(0-180)
+    public static $FontSpace = 3; //æ–‡å­—é—´è·
+    public static $DisturbLine = 15; //å¹²æ‰°æ›²çº¿æ•°é‡
+    public static $DisturbPixel = 100; //å¹²æ‰°å™ªç‚¹æ•°é‡
+    public static $VarName = 'vcode';   //éªŒè¯ç sessionå˜é‡çš„åç§°
+    //å…è®¸å‡ºç°çš„å­—ç¬¦ï¼Œå¯ä»¥æ˜¯æ±‰å­—
     public static $AllowStr = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'P', 'R', 'S', 'U', 'W', 'X', 'Y', 'Z');
 
     public static function show() {
-        //»º´æ¿ØÖÆ
+        //ç¼“å­˜æ§åˆ¶
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: no-cache, must-revalidate');
         header('Pragma: no-cache');
         header('Content-type: image/jpeg');
 
         $vcode = '';
-        //°´²ÎÊıÖĞµÄ¿í¸ßÀ´´´½¨Ò»¸öÍ¼Ïñ
+        //æŒ‰å‚æ•°ä¸­çš„å®½é«˜æ¥åˆ›å»ºä¸€ä¸ªå›¾åƒ
         $image = imagecreatetruecolor(self::$ImageWidth, self::$ImageHeight);
-        //¶¨ÒåÍ¼ÏñµÄ±³¾°É«
+        //å®šä¹‰å›¾åƒçš„èƒŒæ™¯è‰²
         $bgColor = imagecolorallocate($image, self::$ImageBgcolor[0], self::$ImageBgcolor[1], self::$ImageBgcolor[2]);
-        //°´¸ß¿í»æÖÆÒ»¸ö¾ØĞÎ
+        //æŒ‰é«˜å®½ç»˜åˆ¶ä¸€ä¸ªçŸ©å½¢
         imagerectangle($image, 1, 1, self::$ImageWidth, self::$ImageHeight, $bgColor);
-        //Ìî³ä±³¾°ÑÕÉ«
+        //å¡«å……èƒŒæ™¯é¢œè‰²
         imagefill($image, 0, 0, $bgColor);
 
-        //Ñ­»·»æÖÆ¸ÉÈÅÇúÏß
+        //å¾ªç¯ç»˜åˆ¶å¹²æ‰°æ›²çº¿
         for ($i = 0; $i < self::$DisturbLine; $i++) {
-            //Ëæ»ú¶¨ÒåÏßÌõÑÕÉ«
+            //éšæœºå®šä¹‰çº¿æ¡é¢œè‰²
             $lineColor = imagecolorallocate($image, mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255));
-            //Ëæ»úÎ»ÖÃ£¬½Ç¶ÈºÍ»¡¶ÈÀ´»æÖÆÇúÏß
+            //éšæœºä½ç½®ï¼Œè§’åº¦å’Œå¼§åº¦æ¥ç»˜åˆ¶æ›²çº¿
             imagearc($image, mt_rand(-10, self::$ImageWidth), mt_rand(-10, self::$ImageHeight), mt_rand(30, 300), mt_rand(20, 200), 55, 44, $lineColor);
         }
 
-        //Ñ­»·»æÖÆ¸ÉÈÅÔëµã
+        //å¾ªç¯ç»˜åˆ¶å¹²æ‰°å™ªç‚¹
         for ($i = 0; $i < self::$DisturbPixel; $i++) {
-            //¶¨ÒåËæ»úÔëµãÑÕÉ«
+            //å®šä¹‰éšæœºå™ªç‚¹é¢œè‰²
             $pixelColor = imagecolorallocate($image, mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255));
-            //»æÖÆÔëµã
+            //ç»˜åˆ¶å™ªç‚¹
             imagesetpixel($image, mt_rand(0, self::$ImageWidth), mt_rand(0, self::$ImageHeight), $pixelColor);
         }
 
-        //´ÓÔ¤¶¨Òå×Ö·ûÊı×éÖĞËæ»ú³éÈ¡³öÖ¸¶¨ÊıÁ¿µÄ¼üÃû£¬²¢¸´ÖÆµ½Ò»¸öĞÂµÄÊı×é
+        //ä»é¢„å®šä¹‰å­—ç¬¦æ•°ç»„ä¸­éšæœºæŠ½å–å‡ºæŒ‡å®šæ•°é‡çš„é”®åï¼Œå¹¶å¤åˆ¶åˆ°ä¸€ä¸ªæ–°çš„æ•°ç»„
         $randKey = array_rand(self::$AllowStr, self::$StrCount);
 
-        //¼ÆËãÎÄ×ÖµÄ¶¥¾à
+        //è®¡ç®—æ–‡å­—çš„é¡¶è·
         $topSpace = self::$ImageHeight - ((self::$ImageHeight - self::$FontSize) / 2);
         $i = 0;
-        //Ñ­»·»æÖÆ×Ö·û
+        //å¾ªç¯ç»˜åˆ¶å­—ç¬¦
         foreach ($randKey as $key) {
             $i++;
-            //Æ´½Ó×Ö·û
+            //æ‹¼æ¥å­—ç¬¦
             $vcode .= self::$AllowStr[$key];
-            //Ëæ»ú¶¨Òå×Ö·ûÑÕÉ«
+            //éšæœºå®šä¹‰å­—ç¬¦é¢œè‰²
             $fontColor = imagecolorallocate($image, mt_rand(0, 170), mt_rand(0, 170), mt_rand(0, 170));
-            //Ğ´ÈëÎÄ×Ö£¨Í¼Ïñ£¬ÎÄ×Ö´óĞ¡£¬Ğı×ª½Ç¶È£¬ÎÄ×Ö¼ä¾à£¬ÎÄ×Ö¶¥¾à£¬ÎÄ×ÖÑÕÉ«£¬×ÖÌå£¬×Ö·û£©
+            //å†™å…¥æ–‡å­—ï¼ˆå›¾åƒï¼Œæ–‡å­—å¤§å°ï¼Œæ—‹è½¬è§’åº¦ï¼Œæ–‡å­—é—´è·ï¼Œæ–‡å­—é¡¶è·ï¼Œæ–‡å­—é¢œè‰²ï¼Œå­—ä½“ï¼Œå­—ç¬¦ï¼‰
             imagettftext($image, self::$FontSize, mt_rand(-self::$FontRotate, self::$FontRotate), (self::$FontSize + self::$FontSpace) * ($i - 0.8), $topSpace, $fontColor, self::$FontFace, self::$AllowStr[$key]);
         }
-        //Ğ´Èësession
+        //å†™å…¥session
         $_SESSION[self::$VarName] = $vcode;
-        //Êä³öÍ¼Ïñ
+        //è¾“å‡ºå›¾åƒ
         imagejpeg($image);
-        //ÊÍ·ÅÄÚ´æ
+        //é‡Šæ”¾å†…å­˜
         imagedestroy($image);
     }
 }

@@ -1,26 +1,26 @@
 <?php
 namespace QuarkPHP;
-//°æ±¾ºÅ
+//ç‰ˆæœ¬å·
 //public static $Version = '1.0.0';
 
-//¿É±»¿ØÖÆÆ÷¼Ì³ÐµÄ»ùÀà£¬ÊµÏÖ »ñÈ¡Â·ÓÉ²ÎÊýÖµ¡¢Ö´ÐÐÊÓÍ¼¡¢ÔØÈëÄ£ÐÍ¡¢ÔØÈë²å¼þµÈ¹¦ÄÜ
+//å¯è¢«æŽ§åˆ¶å™¨ç»§æ‰¿çš„åŸºç±»ï¼Œå®žçŽ° èŽ·å–è·¯ç”±å‚æ•°å€¼ã€æ‰§è¡Œè§†å›¾ã€è½½å…¥æ¨¡åž‹ã€è½½å…¥æ’ä»¶ç­‰åŠŸèƒ½
 class Base {
 
-    //½ÓÊÕÂ·ÓÉ²ÎÊýµÄ±äÁ¿
+    //æŽ¥æ”¶è·¯ç”±å‚æ•°çš„å˜é‡
     public static $RouteParams = array();
     public static $ModelPath = '/model';
 
-    //ÊÓÍ¼ÎÄ¼þÄ¿Â¼
+    //è§†å›¾æ–‡ä»¶ç›®å½•
     public static $ViewPath = '';
 
-    //ÊÓÍ¼ÀàÐÍ£º¿ÕÎª²»¼ÓÔØÊÓÍ¼£¬HTML¼ÓÔØÊÓÍ¼ÎÄ¼þ£¬JSONÊä³öJSON¸ñÊ½
+    //è§†å›¾ç±»åž‹ï¼šç©ºä¸ºä¸åŠ è½½è§†å›¾ï¼ŒHTMLåŠ è½½è§†å›¾æ–‡ä»¶ï¼ŒJSONè¾“å‡ºJSONæ ¼å¼
     public static $ViewType = '';
-    //ÊÓÍ¼±äÁ¿
+    //è§†å›¾å˜é‡
     public static $ViewData = array();
-    //ÊÓÍ¼ÎÄ¼þ£¬½öÔÚ$viewType='html'Ê±ÓÐÐ§
+    //è§†å›¾æ–‡ä»¶ï¼Œä»…åœ¨$viewType='html'æ—¶æœ‰æ•ˆ
     public static $ViewFile = '';
 
-    //ÊÖ¶¯ÔØÈëHTMLÊÓÍ¼
+    //æ‰‹åŠ¨è½½å…¥HTMLè§†å›¾
     public static function ShowHTML($viewFile, $viewData = array()) {
         $viewFile = ROOT_PATH . '/view/' . $viewFile;
         if (file_exists($viewFile)) {
@@ -29,29 +29,29 @@ class Base {
             }
             include($viewFile);
         } else {
-            echo 'ÊÓÍ¼ÎÄ¼þ' . $viewFile . '²»´æÔÚ';
+            echo 'è§†å›¾æ–‡ä»¶' . $viewFile . 'ä¸å­˜åœ¨';
             exit();
         }
     }
 
-    //ÊÖ¶¯ÔØÈëJSONÊÓÍ¼
+    //æ‰‹åŠ¨è½½å…¥JSONè§†å›¾
     public static function ShowJSON($viewData = array()) {
         echo json_encode($viewData);
     }
 
-    //ÔØÈëÄ£ÐÍ
+    //è½½å…¥æ¨¡åž‹
     public static function Model($quarkModelFile) {
         $quarkModelInfo = self::parsePath($quarkModelFile);
         $quarkModelFile = ROOT_PATH . '/model/' . $quarkModelInfo['path'] . '/' . $quarkModelInfo["class"] . '.php';
         if (file_exists($quarkModelFile)) {
             require_once($quarkModelFile);
         } else {
-            echo 'Ä£ÐÍÎÄ¼þ' . $quarkModelFile . '²»´æÔÚ';
+            echo 'æ¨¡åž‹æ–‡ä»¶' . $quarkModelFile . 'ä¸å­˜åœ¨';
             exit();
         }
     }
 
-    //½âÎöÎÄ¼þÂ·¾¶ºÍÀàÃû
+    //è§£æžæ–‡ä»¶è·¯å¾„å’Œç±»å
     private static function parsePath($path) {
         $pathinfo = pathinfo($path);
         $return["path"] = ($pathinfo["dirname"] == DIRECTORY_SEPARATOR || $pathinfo["dirname"] == '.') ? "" : $pathinfo["dirname"];

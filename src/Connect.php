@@ -1,77 +1,77 @@
 <?php
 namespace QuarkPHP;
 
-//Á¬½ÓÆ÷Àà
+//è¿æ¥å™¨ç±»
 class Connect {
-    //MySQLÁ¬½Ó²ÎÊı
+    //MySQLè¿æ¥å‚æ•°
     public static $MySQLconfig = array(
         0 => array(
-            'host' => '127.0.0.1',      //Ö÷»ú
-            'port' => 3306,             //¶Ë¿Ú
-            'user' => 'root',           //ÕËºÅ
-            'pwd' => 'password',        //ÃÜÂë
-            'database' => 'test',       //Êı¾İ¿â
-            'charset' => 'utf-8',       //±àÂë
-            'timeout' => 10,            //³¬Ê±
-            'persistent' => false      //³Ö¾ÃÁ¬½Ó
+            'host' => '127.0.0.1',      //ä¸»æœº
+            'port' => 3306,             //ç«¯å£
+            'user' => 'root',           //è´¦å·
+            'pwd' => 'password',        //å¯†ç 
+            'database' => 'test',       //æ•°æ®åº“
+            'charset' => 'utf-8',       //ç¼–ç 
+            'timeout' => 10,            //è¶…æ—¶
+            'persistent' => false      //æŒä¹…è¿æ¥
         )
     );
 
-    //PostgreSQLÁ¬½Ó²ÎÊı
+    //PostgreSQLè¿æ¥å‚æ•°
     public static $PGSQLconfig = array(
         0 => array(
-            'host' => '127.0.0.1',      //Ö÷»ú
-            'port' => 5432,             //¶Ë¿Ú
-            'user' => 'postgres',       //ÕËºÅ
-            'pwd' => 'password',        //ÃÜÂë
-            'database' => 'test',       //Êı¾İ¿â
-            'timeout' => 10,            //³¬Ê±
-            'persistent' => false      //³Ö¾ÃÁ¬½Ó
+            'host' => '127.0.0.1',      //ä¸»æœº
+            'port' => 5432,             //ç«¯å£
+            'user' => 'postgres',       //è´¦å·
+            'pwd' => 'password',        //å¯†ç 
+            'database' => 'test',       //æ•°æ®åº“
+            'timeout' => 10,            //è¶…æ—¶
+            'persistent' => false      //æŒä¹…è¿æ¥
         )
     );
 
-    //RedisÁ¬½Ó²ÎÊı
+    //Redisè¿æ¥å‚æ•°
     public static $RedisConfig = array(
         0 => array(
-            'host' => '127.0.0.1',      //Ö÷»ú
-            'port' => 5432,             //¶Ë¿Ú
-            'pwd' => 'password',        //ÃÜÂë
-            'database' => 0,            //Êı¾İ¿âĞòºÅ
-            'timeout' => 10             //³¬Ê±
+            'host' => '127.0.0.1',      //ä¸»æœº
+            'port' => 5432,             //ç«¯å£
+            'pwd' => 'password',        //å¯†ç 
+            'database' => 0,            //æ•°æ®åº“åºå·
+            'timeout' => 10             //è¶…æ—¶
         )
     );
 
-    //MongoDBÁ¬½Ó²ÎÊı
+    //MongoDBè¿æ¥å‚æ•°
     public static $MongodbConfig = array(
         0 => array(
-            'host' => '127.0.0.1',      //Ö÷»ú
-            'port' => 5432,             //¶Ë¿Ú
-            'user' => 'user',           //ÕËºÅ
-            'pwd' => 'password',        //ÃÜÂë
-            'database' => ''           //Êı¾İ¿âĞòºÅ
+            'host' => '127.0.0.1',      //ä¸»æœº
+            'port' => 5432,             //ç«¯å£
+            'user' => 'user',           //è´¦å·
+            'pwd' => 'password',        //å¯†ç 
+            'database' => ''           //æ•°æ®åº“åºå·
         )
     );
 
-    //MemcachedÁ¬½Ó²ÎÊı
+    //Memcachedè¿æ¥å‚æ•°
     public static $MemcachedConfig = array(
         0 => array(
-            'host' => '127.0.0.1',      //Ö÷»ú
-            'port' => 5432,             //¶Ë¿Ú
-            'user' => 10                //³¬Ê±
+            'host' => '127.0.0.1',      //ä¸»æœº
+            'port' => 5432,             //ç«¯å£
+            'user' => 10                //è¶…æ—¶
         )
     );
 
-    //´´½¨MySQLÊı¾İ¿âÁ¬½Ó²¢·µ»ØÁ¬½Ó¶ÔÏó
+    //åˆ›å»ºMySQLæ•°æ®åº“è¿æ¥å¹¶è¿”å›è¿æ¥å¯¹è±¡
     public static function MySQL($configIndex = 0) {
         if (!class_exists('pdo')) {
-            Logger::Error('²»Ö§³ÖPDOÀ©Õ¹');
+            Logger::Error('ä¸æ”¯æŒPDOæ‰©å±•');
             return false;
         }
 
         try {
             $dsn = 'mysql:host=' . self::$MySQLconfig[$configIndex]['host'] . ';port=' . self::$MySQLconfig[$configIndex]['port'] . ';dbname=' . self::$MySQLconfig[$configIndex]['database'] . ';charset=' . self::$MySQLconfig[$configIndex]['charset'];
             $obj = new PDO($dsn, self::$MySQLconfig[$configIndex]['user'], self::$MySQLconfig[$configIndex]['pwd'], array(PDO::ATTR_TIMEOUT => self::$MySQLconfig[$configIndex]['timeout'], PDO::ATTR_PERSISTENT => self::$MySQLconfig[$configIndex]['persistent']));
-            //¹Ø±Õ±¾µØ±äÁ¿Öµ´¦Àí£¬ÓÉmysqlÀ´×ª»»°ó¶¨²ÎÊıµÄ±äÁ¿ÖµÀàĞÍ£¬·ÀÖ¹SQL×¢Èë
+            //å…³é—­æœ¬åœ°å˜é‡å€¼å¤„ç†ï¼Œç”±mysqlæ¥è½¬æ¢ç»‘å®šå‚æ•°çš„å˜é‡å€¼ç±»å‹ï¼Œé˜²æ­¢SQLæ³¨å…¥
             $obj->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             return $obj;
         } catch (PDOException $e) {
@@ -80,17 +80,17 @@ class Connect {
         }
     }
 
-    //´´½¨PostgreSQLÊı¾İ¿âÁ¬½Ó²¢·µ»ØÁ¬½Ó¶ÔÏó
+    //åˆ›å»ºPostgreSQLæ•°æ®åº“è¿æ¥å¹¶è¿”å›è¿æ¥å¯¹è±¡
     public static function PGSQL($configIndex = 0) {
         if (!class_exists('pdo')) {
-            Logger::Error('PDO×é¼ş²»´æÔÚ');
+            Logger::Error('PDOç»„ä»¶ä¸å­˜åœ¨');
             return false;
         }
 
         try {
             $dsn = 'pgsql:host=' . self::$PGSQLconfig[$configIndex]['host'] . ';port=' . self::$PGSQLconfig[$configIndex]['port'] . ';dbname=' . self::$PGSQLconfig[$configIndex]['database'];
             $obj = new PDO($dsn, self::$PGSQLconfig[$configIndex]['user'], self::$PGSQLconfig[$configIndex]['pwd'], array(PDO::ATTR_TIMEOUT => self::$PGSQLconfig[$configIndex]['timeout'], PDO::ATTR_PERSISTENT => self::$PGSQLconfig[$configIndex]['persistent']));
-            //¹Ø±Õ±¾µØ±äÁ¿Öµ´¦Àí£¬ÓÉmysqlÀ´×ª»»°ó¶¨²ÎÊıµÄ±äÁ¿ÖµÀàĞÍ£¬·ÀÖ¹SQL×¢Èë
+            //å…³é—­æœ¬åœ°å˜é‡å€¼å¤„ç†ï¼Œç”±mysqlæ¥è½¬æ¢ç»‘å®šå‚æ•°çš„å˜é‡å€¼ç±»å‹ï¼Œé˜²æ­¢SQLæ³¨å…¥
             $obj->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             return $obj;
         } catch (PDOException $e) {
@@ -99,10 +99,10 @@ class Connect {
         }
     }
 
-    //´´½¨RedisÁ¬½Ó²¢·µ»ØÁ¬½Ó¶ÔÏó
+    //åˆ›å»ºRedisè¿æ¥å¹¶è¿”å›è¿æ¥å¯¹è±¡
     public static function Redis($configIndex = 0) {
         if (!class_exists('Redis')) {
-            Logger::Error('²»Ö§³ÖRedisÀ©Õ¹');
+            Logger::Error('ä¸æ”¯æŒRedisæ‰©å±•');
             return false;
         }
 
@@ -117,15 +117,15 @@ class Connect {
             }
             return $obj;
         } else {
-            Logger::Error('ÎŞ·¨Á¬½ÓRedis·şÎñÆ÷' . self::$RedisConfig[$configIndex]['host']);
+            Logger::Error('æ— æ³•è¿æ¥RedisæœåŠ¡å™¨' . self::$RedisConfig[$configIndex]['host']);
             return false;
         }
     }
 
-    //´´½¨MongodbÁ¬½Ó²¢·µ»ØÁ¬½Ó¶ÔÏó
+    //åˆ›å»ºMongodbè¿æ¥å¹¶è¿”å›è¿æ¥å¯¹è±¡
     public static function Mongodb($configIndex = 0) {
         if (!class_exists('Mongo')) {
-            Logger::Error('²»Ö§³ÖMongoÀ©Õ¹');
+            Logger::Error('ä¸æ”¯æŒMongoæ‰©å±•');
             return false;
         }
 
@@ -142,10 +142,10 @@ class Connect {
 
     }
 
-    //´´½¨MemcachedÁ¬½Ó²¢·µ»ØÁ¬½Ó¶ÔÏó
+    //åˆ›å»ºMemcachedè¿æ¥å¹¶è¿”å›è¿æ¥å¯¹è±¡
     public static function Memcached($configIndex = 0) {
         if (!class_exists('memcache')) {
-            Logger::Error('²»Ö§³ÖmemcacheÀ©Õ¹');
+            Logger::Error('ä¸æ”¯æŒmemcacheæ‰©å±•');
             return false;
         }
 
@@ -154,7 +154,7 @@ class Connect {
         if ($obj->connect(self::$RedisConfig[$configIndex]['host'], self::$RedisConfig[$configIndex]['port'], self::$RedisConfig[$configIndex]['timeout'])) {
             return $obj;
         } else {
-            Logger::Error('ÎŞ·¨Á¬½ÓMmecached·şÎñÆ÷' . self::$MemcachedConfig[$configIndex]['host']);
+            Logger::Error('æ— æ³•è¿æ¥MmecachedæœåŠ¡å™¨' . self::$MemcachedConfig[$configIndex]['host']);
             return false;
         }
     }

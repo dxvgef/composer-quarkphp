@@ -1,44 +1,44 @@
 <?php
 namespace QuarkPHP;
 
-//µ÷¶ÈÆ÷
+//è°ƒåº¦å™¨
 class Dispatcher {
     public static $htmlCache = false;
     public static $htmlCachePath = '';
     public static $controllerPath = '/controller';
 
-    //Ö´ÐÐµ÷¶È
+    //æ‰§è¡Œè°ƒåº¦
     static public function Run($controller, $routerParams = array()) {
-        //ÅÐ¶Ï²¢¶ÁÈ¡HTML»º´æÎÄ¼þ
+        //åˆ¤æ–­å¹¶è¯»å–HTMLç¼“å­˜æ–‡ä»¶
         if (self::$htmlCache == true) {
             self::getHTMLCache();
         }
 
-        //½âÎö¿ØÖÆÆ÷ÐÅÏ¢
+        //è§£æžæŽ§åˆ¶å™¨ä¿¡æ¯
         $info = self::parseController($controller);
-        //ÅÐ¶Ï¿ØÖÆÆ÷ÎÄ¼þÊÇ·ñ´æÔÚ
+        //åˆ¤æ–­æŽ§åˆ¶å™¨æ–‡ä»¶æ˜¯å¦å­˜åœ¨
         if (!file_exists($info['path'])) {
-            echo '¿ØÖÆÆ÷ÎÄ¼þ' . $info['path'] . '²»´æÔÚ';
+            echo 'æŽ§åˆ¶å™¨æ–‡ä»¶' . $info['path'] . 'ä¸å­˜åœ¨';
             exit();
         }
-        //ÔØÈë¿ØÖÆÆ÷ÎÄ¼þ
+        //è½½å…¥æŽ§åˆ¶å™¨æ–‡ä»¶
         require_once($info['path']);
-        //ÅÐ¶Ï¿ØÖÆÆ÷Àà¼°·½·¨ÊÇ·ñ´æÔÚ
+        //åˆ¤æ–­æŽ§åˆ¶å™¨ç±»åŠæ–¹æ³•æ˜¯å¦å­˜åœ¨
         if (!method_exists($info['class'], $info['func'])) {
-            echo '¿ØÖÆÆ÷ÎÄ¼þ' . $info['path'] . 'µÄ' . $info["class"] . 'Àà»òÆä' . $info["func"] . '·½·¨²»´æÔÚ';
+            echo 'æŽ§åˆ¶å™¨æ–‡ä»¶' . $info['path'] . 'çš„' . $info["class"] . 'ç±»æˆ–å…¶' . $info["func"] . 'æ–¹æ³•ä¸å­˜åœ¨';
             exit();
         }
 
-        //°ÑÂ·ÓÉ²ÎÊý´«Èëµ½
+        //æŠŠè·¯ç”±å‚æ•°ä¼ å…¥åˆ°
         Base::$RouteParams =& $routerParams;
 
-        //´ò¿ªÊä³ö»º´æ
+        //æ‰“å¼€è¾“å‡ºç¼“å­˜
         ob_start();
 
-        //Ö´ÐÐ¿ØÖÆÆ÷
+        //æ‰§è¡ŒæŽ§åˆ¶å™¨
         $info['class']::$info['func']();
 
-        //×Ô¶¯Ö´ÐÐÊÓÍ¼
+        //è‡ªåŠ¨æ‰§è¡Œè§†å›¾
         switch (Base::$ViewType) {
             case 'html':
                 if (Base::$ViewFile != '') {
@@ -70,13 +70,13 @@ class Dispatcher {
     private static function makeHTMLCache() {
         $code = md5($_SERVER['REQUEST_URI']);
         $file = ROOT_PATH . '/' . Dispatcher::$htmlCachePath . '/' . $code . '.html';
-        $content = ob_get_contents();//È¡µÃphpÒ³ÃæÊä³öµÄÈ«²¿ÄÚÈÝ
-        $fp = fopen(ROOT_PATH . '/' . Dispatcher::$htmlCachePath . '/' . $code . '.html', 'w'); //´´½¨Ò»¸öÎÄ¼þ£¬²¢´ò¿ª£¬×¼±¸Ð´Èë
-        fwrite($fp, $content); //°ÑphpÒ³ÃæµÄÄÚÈÝÈ«²¿Ð´Èëoutput00001.html£¬È»ºó¡­¡­
+        $content = ob_get_contents();//å–å¾—phpé¡µé¢è¾“å‡ºçš„å…¨éƒ¨å†…å®¹
+        $fp = fopen(ROOT_PATH . '/' . Dispatcher::$htmlCachePath . '/' . $code . '.html', 'w'); //åˆ›å»ºä¸€ä¸ªæ–‡ä»¶ï¼Œå¹¶æ‰“å¼€ï¼Œå‡†å¤‡å†™å…¥
+        fwrite($fp, $content); //æŠŠphpé¡µé¢çš„å†…å®¹å…¨éƒ¨å†™å…¥output00001.htmlï¼Œç„¶åŽâ€¦â€¦
         fclose($fp);
     }
 
-    //½âÎö¿ØÖÆÆ÷ÎÄ¼þÂ·¾¶¡¢ÀàÃû¡¢·½·¨Ãû
+    //è§£æžæŽ§åˆ¶å™¨æ–‡ä»¶è·¯å¾„ã€ç±»åã€æ–¹æ³•å
     private static function parseController($path) {
         $pathinfo = pathinfo($path);
         $return["class"] = ($pathinfo["filename"] == "") ? "" : $pathinfo["filename"];
