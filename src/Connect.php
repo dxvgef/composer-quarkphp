@@ -133,7 +133,7 @@ class Connect {
         $conn = new Mongo($dsn);
 
         try {
-            $obj = $conn->self::$MongodbConfig[$configIndex]['database'];
+            $obj = $conn->{self::$MongodbConfig[$configIndex]['database']};
             return $obj;
         } catch (MongoConnectionException $e) {
             Logger::Error($e->getMessage());
