@@ -1,7 +1,7 @@
 <?php
 namespace QuarkPHP;
 //版本号
-//public static $Version = '1.0.0';
+//public static $Version = '1.0.1';
 
 //可被控制器继承的基类，实现 获取路由参数值、执行视图、载入模型、载入插件等功能
 class Base {
