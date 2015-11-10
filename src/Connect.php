@@ -1,5 +1,7 @@
 <?php
 namespace QuarkPHP;
+use \PDO;
+use \PDOException;
 
 //连接器类
 class Connect {
