@@ -34,6 +34,7 @@ class Base {
 
     //手动载入JSON视图
     public static function ShowJSON($viewData = array()) {
+		header('Content-type: text/json; charset=utf-8');
         echo json_encode($viewData);
     }
 

@@ -46,6 +46,7 @@ class Dispatcher {
                 }
                 break;
             case 'json';
+				header('Content-type: text/json; charset=utf-8');
 				echo json_encode(Base::$ViewData);
                 return;
                 break;
