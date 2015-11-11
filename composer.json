@@ -3,7 +3,7 @@
 	"description": "QuarkPHP is a PHP framework",
 	"keywords": ["framework"],
 	"license": "BSD-3-Clause",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"minimum-stability": "stable",
 	"authors": [
 		{

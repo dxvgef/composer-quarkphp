@@ -46,7 +46,8 @@ class Dispatcher {
                 }
                 break;
             case 'json';
-                return json_encode(Base::$ViewData);
+				echo json_encode(Base::$ViewData);
+                return;
                 break;
         }
 
