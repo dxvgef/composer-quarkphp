@@ -21,9 +21,10 @@ class Base {
     //手动载入HTML视图
     public static function ShowHTML($viewFile, $viewData = array()) {
         $viewFile = ROOT_PATH . '/view/' . $viewFile;
+        $data = array_merge($viewData, Base::$ViewData);
         if (file_exists($viewFile)) {
-            if (!empty($viewData)) {
-                extract($viewData, EXTR_OVERWRITE);
+            if (!empty($data)) {
+                extract($data, EXTR_OVERWRITE);
             }
             include($viewFile);
         } else {
@@ -35,7 +36,8 @@ class Base {
     //手动载入JSON视图
     public static function ShowJSON($viewData = array()) {
 		header('Content-type: text/json; charset=utf-8');
-        echo json_encode($viewData);
+        $data = array_merge($viewData, Base::$ViewData);
+        echo json_encode($data);
     }
 
     //载入模型
