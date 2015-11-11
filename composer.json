@@ -3,7 +3,7 @@
 	"description": "QuarkPHP is a PHP framework",
 	"keywords": ["framework"],
 	"license": "BSD-3-Clause",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"minimum-stability": "stable",
 	"authors": [
 		{
@@ -16,12 +16,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-            "QuarkPHP\\Dispatcher\\": "src/Dispatcher",
-			"QuarkPHP\\Base\\": "src/Base",
-            "QuarkPHP\\Logger\\": "src/Logger",
-            "QuarkPHP\\Connect\\": "src/Connect",
-            "QuarkPHP\\Upload\\": "src/Upload",
-            "QuarkPHP\\VerifyCode\\": "src/VerifyCode"
+            "QuarkPHP\\": "src/"
 		}
 	}
 }
