@@ -3,12 +3,12 @@
 	"description": "QuarkPHP is a PHP framework",
 	"keywords": ["framework"],
 	"license": "BSD-3-Clause",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"minimum-stability": "stable",
 	"authors": [
 		{
 			"name": "dxvgef",
-			"email": "dxvgef@163.com"
+			"email": "dxvgef@outlook.com"
 		}
 	],
 	"require": {
